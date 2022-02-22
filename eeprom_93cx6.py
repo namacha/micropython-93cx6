@@ -143,7 +143,7 @@ class Device:
         debug("wait_ready", "setting cs to high")
         self.cs.on()
         debug("wait_ready", "set cs to high, waiting dev_do to low")
-        while self.do.vlaue() != 1:
+        while self.do.value() != 1:
             usleep(DELAY_WAIT)
         self.cs.off()
 
@@ -276,7 +276,7 @@ class Device:
 
         for count in range(length):
             read_value = 0
-            if addr + count > self.addr:
+            if addr + count > self.bytes:
                 break
             for i in range(num_bits, 0, -1):
                 self.sk.on()

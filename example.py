@@ -16,20 +16,32 @@ dev = eeprom_93cx6.Device(
 # dev.write(1, 0x02)
 # dev.write(2, 0x03)
 
+#  dev.ew_enable()
+#
+#  for i in range(0x00, 0x31):
+#      dev.write(i, 0xff80)
+#
+#  dev.write(0x31, 0x66af)
+#  dev.write(0x33, 0x66af)
+#  dev.write(0x35, 0x66af)
+#
+#  dev.write(0x32, 0xff66)
+#  dev.write(0x34, 0xff66)
+#  dev.write(0x36, 0xff66)
+#
+#  dev.ew_disable()
+
 
 def dump_buffer(buf, start=0):
     num_lines = len(buf) // 8
     for nlines in range(num_lines):
-        addr = (8*nlines) + start
-        print(f'0x{addr:02X} ', end='')
-        for v in buf[nlines*8:8*(nlines+1)]:
-            print(f'{v:04X} ', end='')
+        addr = (8 * nlines) + start
+        print(f"0x{addr:02X} ", end="")
+        for v in buf[nlines * 8 : 8 * (nlines + 1)]:
+            print(f"{v:04X} ", end="")
         print()
 
 
-buf = []
-for addr in range(128):
-    value = dev.read(addr)
-    buf.append(value)
+buf = dev.read_sequential(0, 128)
 
 dump_buffer(buf, start=0)

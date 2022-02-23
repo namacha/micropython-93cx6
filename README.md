@@ -1,6 +1,7 @@
 # micropython-93cx6
 
 A library to interface with EEPROM 93cx6 series with micropython.
+
 It's a basically a port of [nopnop2002/esp-idf-93Cx6](https://github.com/nopnop2002/esp-idf-93Cx6)
 
 I tested this library with ABLIC S93C56 with ESP32.
@@ -38,25 +39,26 @@ dev = eeprom_93cx6.Device(
     do=15,
 )
 
+
+# dev.ew_enable()
+#
 # dev.write(0, 0x01)
 # dev.write(1, 0x02)
 # dev.write(2, 0x03)
-
+#
+# dev.ew_disable()
 
 def dump_buffer(buf, start=0):
     num_lines = len(buf) // 8
     for nlines in range(num_lines):
-        addr = (8*nlines) + start
-        print(f'0x{addr:02X} ', end='')
-        for v in buf[nlines*8:8*(nlines+1)]:
-            print(f'{v:04X} ', end='')
+        addr = (8 * nlines) + start
+        print(f"0x{addr:02X} ", end="")
+        for v in buf[nlines * 8 : 8 * (nlines + 1)]:
+            print(f"{v:04X} ", end="")
         print()
 
 
-buf = []
-for addr in range(128):
-    value = dev.read(addr)
-    buf.append(value)
+buf = dev.read_sequential(0, 128)
 
 dump_buffer(buf, start=0)
 ```

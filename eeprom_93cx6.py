@@ -6,7 +6,7 @@ from utime import sleep_us as usleep
 from machine import Pin
 
 
-__DEBUG = True
+__DEBUG = False
 
 
 def debug(tag, content):

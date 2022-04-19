@@ -1,6 +1,5 @@
 import eeprom_93cx6
 
-eeprom_93cx6.__DEBUG = False
 
 # specify gpio pin of cs, sk, di, do
 dev = eeprom_93cx6.Device(
@@ -21,6 +20,7 @@ dev = eeprom_93cx6.Device(
 #
 # dev.ew_disable()
 
+
 def dump_buffer(buf, start=0):
     num_lines = len(buf) // 8
     for nlines in range(num_lines):
@@ -34,4 +34,3 @@ def dump_buffer(buf, start=0):
 buf = dev.read_sequential(0, 128)
 
 dump_buffer(buf, start=0)
-

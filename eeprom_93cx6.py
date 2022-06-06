@@ -227,7 +227,7 @@ class Device:
         if self.org == EEPROM_MODE_16BIT:
             self.send_bits(0xFFFF & value, 16)
         elif self.org == EEPROM_MODE_8BIT:
-            self.send_bits(0xFFFF & value, 8)
+            self.send_bits(0xFF & value, 8)
         self.cs.off()
         self.wait_ready()
 
